@@ -1,16 +1,24 @@
 import { Injectable, Logger } from '@nestjs/common';
 import { TData } from './dto/numeric.datatype';
 import { InjectModel } from '@nestjs/mongoose';
-import { IData } from './interface/data.interface';
+import { IData, TBatchData } from './interface/data.interface';
 import { Model } from 'mongoose';
 @Injectable()
 export class DataService {
   private readonly logger = new Logger(DataService.name);
   constructor(@InjectModel('Data') private readonly dataModel: Model<IData>) {}
-  async getBatchData(page: number): Promise<IData[]> {
+  async getBatchData(page: number): Promise<TBatchData> {
     const limit = 5;
     const skip = (page - 1) * limit;
-    return this.dataModel.find().skip(skip).limit(limit).exec();
+    const [data, count] = await Promise.all([
+      this.dataModel.find().skip(skip).limit(limit).exec(),
+      this.dataModel.countDocuments().exec(),
+    ]);
+    return {
+      count: count,
+      data: data,
+      limit: limit,
+    };
   }
 
   getRandomData(): TData[] {
@@ -72,7 +80,7 @@ export class DataService {
     this.logger.log('populating data', randomInt);
     for (let i = 0; i < randomInt; i++) {
       const data = this.getRandomData();
-      this.logger.debug(data);
+      // this.logger.debug(data);
       await this.dataModel.insertMany(data);
     }
     return true;

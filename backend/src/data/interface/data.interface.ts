@@ -5,3 +5,9 @@ export interface IData {
   created_at: Date;
   updated_at: Date;
 }
+
+export type TBatchData = {
+  count: number;
+  data: IData[];
+  limit: number;
+};
