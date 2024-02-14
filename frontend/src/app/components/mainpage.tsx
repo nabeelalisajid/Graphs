@@ -1,18 +1,23 @@
 'use client'
 import React, { useEffect, useMemo, useState } from "react";
-import { BarData, CountryData, TData } from "../types/graph.type";
-import { LineChart } from "./linechart";
-import { BarChart } from "./barchart";
+import { CountryData, TData } from "../types/graph.type";
+import { LineChart } from "./LineChart"
+import { BarChart } from "./BarChart";
 import { convertBarData, convertLineData } from "../service/data.service";
+import { Loader } from "./Loader";
 
 
 const fetcher = (url: string) => fetch(url).then(res => res.json());
 
 export const Charts = () => {
+
+  const URL = process.env.NEXT_PUBLIC_SERVER_URL;
+
   const [page, setPage] = useState<number>(1);
+  const [totalPages, setTotalPages] = useState<number>(2); // State to hold total number of pages
   const [currentChart, setCurrentChart] = useState<string>('line');
   const [data, setData] = useState<TData | null>(null); // State to hold fetched data
-
+  console.log(page, totalPages)
   const lineData = useMemo(() => data ? convertLineData(data as CountryData[]) : [], [data]);
   const barData = useMemo(() => data ? convertBarData(data as CountryData[]) : [], [data]);
 
@@ -27,7 +32,7 @@ export const Charts = () => {
   const fetchRandomData = async () => {
     try {
       setPage(1);
-      const fetchedData = await fetcher('http://localhost:5000/data/random');
+      const fetchedData = await fetcher(`${URL}/random`);
       setData(fetchedData);
     } catch (error) {
       console.error('Error fetching random data:', error);
@@ -35,8 +40,9 @@ export const Charts = () => {
   };
   const fetchURLData = async () => {
     try {
-      const fetchedData = await fetcher(`http://localhost:5000/data?p=${page}`);
-      setData(fetchedData);
+      const fetchedData = await fetcher(`${URL}?p=${page}`);
+      setData(fetchedData.data);
+      setTotalPages(Math.floor(fetchedData.count / fetchedData.limit));
       setPage(page + 1);
     } catch (error) {
       console.error('Error fetching random data:', error);
@@ -67,12 +73,12 @@ export const Charts = () => {
               Bar Chart
             </button>
           </section>
-          <section className="z-10 h-96 w-full items-center justify-between font-mono text-sm lg:flex">
+          <section className="z-10 h-96 w-full items-center  font-mono text-sm lg:flex justify-center">
             {
               data ? (
                 currentChart === 'line' ? <LineChart data={lineData} /> : <BarChart data={barData} />
               ) : (
-                <p>Loading data...</p>
+                <Loader />
               )
             }
           </section>
@@ -85,7 +91,7 @@ export const Charts = () => {
           >
             Random Data
           </button>
-          <button className={`px-7 py-2 rounded ${page >= 2 ? 'bg-blue-500 text-white' : 'bg-gray-200 text-gray-800'
+          <button disabled={page >= totalPages} className={`px-7 py-2 rounded ${page >= 2 ? 'bg-blue-500 text-white' : 'bg-gray-200 text-gray-800'
             }`} onClick={fetchURLData}>Fetch API Batch</button>
         </section>
       </section >
