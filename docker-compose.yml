@@ -12,8 +12,6 @@ services:
 
   backend:
     build: ./backend
-    environment:
-      - MONGODB_URL=mongodb://mongo_db:27017/challenge
     ports:
       - "5000:5000"
     depends_on:
