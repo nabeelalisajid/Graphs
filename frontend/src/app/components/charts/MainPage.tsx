@@ -56,7 +56,7 @@ export const Charts = () => {
   return (
     <>
       <section className="d-flex w-full">
-        <section className="container">
+        <section className="container ">
           <section className="buttons ">
             <button
               className={`px-6 py-2 mb-3 rounded ${currentChart === 'line' ? 'bg-blue-500 text-white' : 'bg-gray-200 text-gray-800'
@@ -84,15 +84,17 @@ export const Charts = () => {
           </section>
         </section>
         <section className="flex justify-around mt-6">
-          <button
-            className={`px-7 py-2 rounded ${page === 1 ? 'bg-blue-500 text-white' : 'bg-gray-200 text-gray-800'
-              }`}
-            onClick={fetchRandomData} // Add click event to fetch random data
-          >
-            Random Data
-          </button>
-          <button disabled={page >= totalPages} className={`px-7 py-2 rounded ${page >= 2 ? 'bg-blue-500 text-white' : 'bg-gray-200 text-gray-800'
-            }`} onClick={fetchURLData}>Fetch API Batch</button>
+          <section className="buttons">
+            <button
+              className={`px-7 py-2 w-full rounded ${page === 1 ? 'bg-blue-500 text-white' : 'bg-gray-200 text-gray-800'
+                }`}
+              onClick={fetchRandomData} // Add click event to fetch random data
+            >
+              Random Data
+            </button>
+            <button disabled={page >= totalPages} className={`px-7 w-full py-2 rounded ${page >= 2 ? 'bg-blue-500 text-white' : 'bg-gray-200 text-gray-800'
+              }`} onClick={fetchURLData}>Fetch API Batch</button>
+          </section>
         </section>
       </section >
     </>
