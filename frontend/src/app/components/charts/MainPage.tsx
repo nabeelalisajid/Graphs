@@ -1,10 +1,10 @@
 'use client'
 import React, { useEffect, useMemo, useState } from "react";
-import { CountryData, TData } from "../types/graph.type";
+import { CountryData, TData } from "../../types/graph.type";
 import { LineChart } from "./LineChart"
 import { BarChart } from "./BarChart";
-import { convertBarData, convertLineData } from "../service/data.service";
-import { Loader } from "./Loader";
+import { convertBarData, convertLineData } from "../../service/data.service";
+import { Loader } from "../utils/Loader";
 
 
 const fetcher = (url: string) => fetch(url).then(res => res.json());

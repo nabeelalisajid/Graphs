@@ -1,6 +1,6 @@
 "use client";
 import { ResponsiveLine } from "@nivo/line";
-import { CountryData } from '../types/graph.type';
+import { CountryData } from '../../types/graph.type';
 
 interface LineChartProps {
   data: CountryData[];

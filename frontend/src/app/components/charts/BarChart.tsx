@@ -1,6 +1,6 @@
 'use client';
 import { ResponsiveBar } from '@nivo/bar'
-import { BarData, CountryData } from '../types/graph.type';
+import { BarData, CountryData } from '../../types/graph.type';
 
 interface LineChartProps {
   data: BarData[];

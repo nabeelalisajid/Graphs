@@ -1,6 +1,6 @@
 import Image from "next/image";
-import { Charts } from './components/MainPage';
-import ErrorBoundary from './components/Errorboundary';
+import { Charts } from './components/charts/MainPage';
+import ErrorBoundary from './components/utils/Errorboundary';
 export default function Home() {
   return (
     <ErrorBoundary>
