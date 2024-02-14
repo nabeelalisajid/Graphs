@@ -5,12 +5,13 @@
 - Database: MongoDB
 - Docker
 
-### Items Done
+### Tasks
 
-[x] Basic Graphs
-[x] Connection with the Backend. Getting the data from the backend
-[x] Dockerize the application
-[] Tests
+- [x] Frontend and Backend Setup
+- [x] Nivo graphs integrations
+- [x] Backend integration
+- [x] Dockerization
+- [ ] Tests
 
 ### How to run the application
 
