@@ -1,9 +1,12 @@
 export interface IData {
   country: string;
-  data: string;
-  color: number;
-  created_at: Date;
-  updated_at: Date;
+  data: {
+    x: string;
+    y: number;
+  }[];
+  color: string;
+  created_at?: Date;
+  updated_at?: Date;
 }
 
 export type TBatchData = {

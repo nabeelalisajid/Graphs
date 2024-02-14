@@ -4,6 +4,6 @@ export type TData = {
   data: TGraphData[];
 };
 export type TGraphData = {
-  x: number;
+  x: string;
   y: number;
 };
