@@ -11,7 +11,7 @@
 - [x] Nivo graphs integrations
 - [x] Backend integration
 - [x] Dockerization
-- [ ] Tests
+- [x] Tests
 
 ### How to run the application
 
